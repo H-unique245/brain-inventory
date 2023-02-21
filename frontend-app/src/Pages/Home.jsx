@@ -1,10 +1,16 @@
 import React from 'react'
-
+import {Button, Text, VStack} from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
 function Home() {
+  const navigate= useNavigate();
+  function handlechat(){
+    navigate("/chat")
+  }
   return (
-    <div>
-      Welcome to chat
-    </div>
+    <VStack gap={'5rem'}>
+      <Text>Welcome to chat</Text>
+      <Button onClick={handlechat }>Start Chat</Button>
+    </VStack>
   )
 }
 

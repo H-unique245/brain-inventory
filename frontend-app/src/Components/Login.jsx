@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { useContext } from "react";
-// import { AuthContext } from "./AuthContext";
+import { useContext } from "react";
+import { AuthContext } from "./AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-//   const { handleLogin } = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const toast = useToast();
   const registerUser = async (data) => {
@@ -31,7 +31,13 @@ const Login = () => {
       return err;
     }
   };
-  
+  const googleAuth = () => {
+    // window.open(
+    //     `http://localhost:8080/user/auth/google/`,
+    // );
+    console.log("check");
+};
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
@@ -50,9 +56,10 @@ const Login = () => {
           duration: 3000,
           isClosable: true,
         });
-        localStorage.setItem("useremail", formData.email);
-        // handleLogin();
-        navigate("/profile");
+        localStorage.setItem("userName", formData.email);
+        handleLogin();
+
+        navigate("/");
       } else {
         toast({
           title: "ERROR",
@@ -121,7 +128,10 @@ const Login = () => {
                 >
                   Login
                 </Button>
-                
+                <Button  onClick={googleAuth}>
+						<span>Sing in with Google</span>
+					</Button>
+
               </Stack>
             </Stack>
           </Box>
